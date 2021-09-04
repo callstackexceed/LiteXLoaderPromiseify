@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 (function () {    
+    "use strict";
     function promiseify(func, failReturnValue) {
         return function(...args) {
             let returnValue;
