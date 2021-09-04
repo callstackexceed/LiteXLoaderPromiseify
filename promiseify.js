@@ -74,6 +74,26 @@ SOFTWARE.
         }
     }
 
+    LXL_Player.prototype.sendFormPromise = async function(...args) {
+        let {returnValue, promise} =
+            promiseify(LXL_Player.prototype.sendForm, undefined)
+            .call(this, ...args);
+        let callbackArgs = await promise;
+        if(typeof callbackArgs[1] === "number") {
+            return {
+                formId: returnValue,
+                player: callbackArgs[0],
+                id: callbackArgs[1]
+            }
+        } else {
+            return {
+                formId: returnValue,
+                player: callbackArgs[0],
+                data: callbackArgs[1]
+            }
+        }
+    }
+
     network.httpGetPromise = async function(...args) {
         let {returnValue, promise} = 
             promiseify(network.httpGet, false)
