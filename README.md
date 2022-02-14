@@ -109,6 +109,58 @@ As the related Json definition format is relatively complicated, it is recommend
 
 <br>
 
+#### Send the normal form built by the form builder
+
+After building a normal form with the form builder, you can send the configured form object to the player and listen for player interaction messages
+The form object can be sent repeatedly, and each time it is sent, a different form ID will be returned, and the callback function will be called when the player interacts, without conflict.
+
+For a player object `pl`, use the function:
+
+`pl.sendForm(fm)`
+
+- Parameters:
+  - fm : `SimpleForm`
+    The configured form object
+- Return value: Promise
+- Return value type: `Promise<{formId, player, id}>`
+  - If the return value is rejected, it means the sending failed
+  - formId : `Integer`
+    Form ID sent
+  - player : `Player`
+    The player object that interacts with the form
+  - id : `Integer`
+    The serial number of the form button that the player clicked, starting from 0
+    If the id is `Null`, the player cancels the form
+
+<br>
+
+#### Sending custom forms built by the form builder
+
+After you are ready to build a custom form with the form builder, you can send the configured form object to the player and listen for player interaction messages
+The form object can be sent repeatedly, and each time it is sent, a different form ID will be returned, and the callback function will be called when the player interacts, without conflict.
+
+For a player object `pl`, use the function:
+
+`pl.sendForm(fm)`
+
+- Parameters:
+  - fm : `CustomForm`
+    Configured custom form object
+- Return value: Promise
+- Return value type: `Promise<{formId, player, data}>`
+  - If the return value is rejected, it means the sending failed
+  - formId : `Integer`
+    Form ID sent
+  - player : `Player`
+    The player object that interacts with the form
+  - data : `Array<...>`
+    The returned form content array
+    The content of each control is stored in the array in the order of the controls on the form
+    If data is `Null`, the player cancels the form
+
+
+<br>
+
 ### 🌏 Web interface API
 
 The following APIs provide a basic network interface for scripts.

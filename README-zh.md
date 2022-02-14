@@ -109,6 +109,58 @@ LiteXLoaderPromiseify promiseify [LiteXLoader](https://lxl.litetitle.com/)的API
 
 <br>
 
+#### 发送表单构建器构建的普通表单
+
+在用表单构建器构建普通表单就绪之后，你可以将配置好的表单对象发送给玩家，并监听玩家的互动消息
+表单对象可以被反复发送，每次发送都会返回一个不同的表单ID，并在有玩家互动时调用各自设置的回调函数，不会打架。
+
+对于某个玩家对象`pl`，使用函数：
+
+`pl.sendForm(fm)`
+
+- 参数：
+  - fm : `SimpleForm`
+    配置好的表单对象
+- 返回值：Promise
+- 返回值类型：`Promise<{formId, player, id}>`
+  - 如果返回值被reject，则代表发送失败
+  - formId : `Integer`
+    发送的表单ID
+  - player : `Player`
+    与表单互动的玩家对象
+  - id : `Integer`
+    玩家点击的表单按钮的序号，从0开始编号
+    如果id为`Null`，则代表玩家取消了表单
+
+<br>
+
+#### 发送表单构建器构建的自定义表单
+
+在用表单构建器构建自定义表单就绪之后，你可以将配置好的表单对象发送给玩家，并监听玩家的互动消息
+表单对象可以被反复发送，每次发送都会返回一个不同的表单ID，并在有玩家互动时调用各自设置的回调函数，不会打架。
+
+对于某个玩家对象`pl`，使用函数：
+
+`pl.sendForm(fm)`
+
+- 参数：
+  - fm : `CustomForm`
+    配置好的自定义表单对象
+- 返回值：Promise
+- 返回值类型：`Promise<{formId, player, data}>`
+  - 如果返回值被reject，则代表发送失败
+  - formId : `Integer`
+    发送的表单ID
+  - player : `Player`
+    与表单互动的玩家对象
+  - data : `Array<...>`
+    返回的表单内容数组
+    数组中中按表单上的控件顺序储存了每一个控件的内容
+    如果data为`Null`，则代表玩家取消了表单
+
+
+<br>
+
 ### 🌏 网络接口 API
 
 下面这些API为脚本提供了基本的网络接口。  
