@@ -259,7 +259,7 @@ LiteXLoaderPromiseify promiseify [LiteXLoader](https://lxl.litetitle.com/)的API
 
 ## 关于LiteXLoaderPromiseify的作者
 
-LiteXLoaderPromiseify的作者是[callstackexceed](https://github.com/callstackexceed)，也是MC addon[**NormaConstructor**](https://github.com/NorthernOceanS/NormaConstructor)的一个开发者。
+LiteXLoaderPromiseify的作者是[callstackexceed](https://github.com/callstackexceed)，也是MC addon[**NormaConstructor**](https://docs.norma.observer/zh-hans/)的一个开发者。
 
 **NormaConstructor**是一个开源的快速构建插件，目前运行在scripting API和lxl上。
 

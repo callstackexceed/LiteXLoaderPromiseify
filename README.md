@@ -259,7 +259,7 @@ This function works asynchronously. It does not wait for the system to execute t
 
 ## About anthor of LiteXLoaderPromiseify
 
-The author of LiteXLoaderPromiseify is [callstackexceed](https://github.com/callstackexceed), who is also a developer of the MC addon [**NormaConstructor**](https://github.com/NorthernOceanS/NormaConstructor).
+The author of LiteXLoaderPromiseify is [callstackexceed](https://github.com/callstackexceed), who is also a developer of the MC addon [**NormaConstructor**](https://docs.norma.observer/en/).
 
 **NormaConstructor** is a open source fast building addon currently runs on both scripting API and lxl.
 
