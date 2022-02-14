@@ -1,6 +1,6 @@
 # llse-promisify
 
-llse-promisify promisify [ll](https://www.litebds.com/)的API。
+llse-promisify promisify [LiteLoader](https://www.litebds.com/)的API。
 
 [English documentation is here.](./README.md)
 

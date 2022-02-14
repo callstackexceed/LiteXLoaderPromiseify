@@ -1,6 +1,6 @@
 # llse-promisify
 
-llse-promisify promisify the [LiteXLoader](https://www.litebds.com/) API.
+llse-promisify promisify the [LiteLoader](https://www.litebds.com/) API.
 
 [中文文档在这。](./README-zh.md)
 
