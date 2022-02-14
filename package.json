@@ -1,9 +1,9 @@
 {
-  "name": "LiteXLoaderPromiseify",
+  "name": "llse-promisify",
   "private": true,
   "version": "0.1.0",
-  "description": "LiteXLoaderPromiseify promiseify the LiteXLoader API",
-  "main": "promiseify.js",
+  "description": "llse-promisify promisify the LiteLoader API",
+  "main": "promisify.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

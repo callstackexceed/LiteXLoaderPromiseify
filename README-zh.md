@@ -1,6 +1,6 @@
-# LiteXLoaderPromiseify
+# llse-promisify
 
-LiteXLoaderPromiseify promiseify [LiteXLoader](https://lxl.litetitle.com/)的API。
+llse-promisify promisify [ll](https://www.litebds.com/)的API。
 
 [English documentation is here.](./README.md)
 
@@ -210,9 +210,9 @@ LiteXLoaderPromiseify promiseify [LiteXLoader](https://lxl.litetitle.com/)的API
 
 ### 📋 文件对象 API
 
-在LXL中，使用「文件对象」来操作和读写某一个特定的文件。
+在LLSE中，使用「文件对象」来操作和读写某一个特定的文件。
 
-> 文件对象 API 中的异步接口尚未被 promiseify ，将来 LiteXLoaderPromiseify 会包含这些接口。
+> 文件对象 API 中的异步接口尚未被 promisify ，将来 llse-promisify 会包含这些接口。
 
 ### 📡 系统调用 API
 
@@ -263,12 +263,12 @@ LiteXLoaderPromiseify promiseify [LiteXLoader](https://lxl.litetitle.com/)的API
 
 <br>
 
-## 关于LiteXLoaderPromiseify的作者
+## 关于llse-promisify的作者
 
-LiteXLoaderPromiseify的作者是[callstackexceed](https://github.com/callstackexceed)，也是MC addon[**NormaConstructor**](https://docs.norma.observer/zh-hans/)的一个开发者。
+llse-promisify的作者是[callstackexceed](https://github.com/callstackexceed)，也是MC addon[**NormaConstructor**](https://docs.norma.observer/zh-hans/)的一个开发者。
 
-**NormaConstructor**是一个开源的快速构建插件，目前运行在scripting API和lxl上。
+**NormaConstructor**是一个开源的快速构建插件，目前运行在scripting API和llse上。
 
 **NormaConstructor**刚刚发布了beta版，它不仅需要用户，也需要开发人员。
 
-如果你喜欢这个lxl插件，请也看看**NormaConstructor**。
+如果你喜欢这个llse插件，请也看看**NormaConstructor**。

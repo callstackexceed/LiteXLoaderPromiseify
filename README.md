@@ -1,6 +1,6 @@
-# LiteXLoaderPromiseify
+# llse-promisify
 
-LiteXLoaderPromiseify promiseify the [LiteXLoader](https://lxl.litetitle.com/) API.
+llse-promisify promisify the [LiteXLoader](https://www.litebds.com/) API.
 
 [中文文档在这。](./README-zh.md)
 
@@ -210,9 +210,9 @@ If the request fails, the status value will be -1
 
 ### 📋 File Object API
 
-In LXL, "file objects" are used to manipulate and read and write to a specific file.
+In LLSE, "file objects" are used to manipulate and read and write to a specific file.
 
-> The asynchronous interfaces of the file object API have not been promiseified yet, and LiteXLoaderPromiseify will include these interfaces in the future.
+> The asynchronous interfaces of the file object API have not been promiseified yet, and llse-promisify will include these interfaces in the future.
 
 ### 📡 System call API
 
@@ -263,12 +263,12 @@ This function works asynchronously. It does not wait for the system to execute t
 
 <br>
 
-## About anthor of LiteXLoaderPromiseify
+## About anthor of llse-promisify
 
-The author of LiteXLoaderPromiseify is [callstackexceed](https://github.com/callstackexceed), who is also a developer of the MC addon [**NormaConstructor**](https://docs.norma.observer/en/).
+The author of llse-promisify is [callstackexceed](https://github.com/callstackexceed), who is also a developer of the MC addon [**NormaConstructor**](https://docs.norma.observer/en/).
 
-**NormaConstructor** is a open source fast building addon currently runs on both scripting API and lxl.
+**NormaConstructor** is a open source fast building addon currently runs on both scripting API and llse.
 
 **NormaConstructor** just has released its beta release, and it really needs developers as well as users.
 
-If you like this lxl plugin, please also have a look on **NormaConstructor**.
+If you like this llse plugin, please also have a look on **NormaConstructor**.
