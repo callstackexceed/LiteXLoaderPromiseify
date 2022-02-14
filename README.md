@@ -208,6 +208,12 @@ If the request fails, the status value will be -1
 
 <br>
 
+### 📋 File Object API
+
+In LXL, "file objects" are used to manipulate and read and write to a specific file.
+
+> The asynchronous interfaces of the file object API have not been promiseified yet, and LiteXLoaderPromiseify will include these interfaces in the future.
+
 ### 📡 System call API
 
 The following APIs provide interfaces for executing some system calls
