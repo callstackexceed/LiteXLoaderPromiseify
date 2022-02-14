@@ -1,5 +1,5 @@
 /*
-LiteXLoaderPromiseify begin, see <https://github.com/callstackexceed/LiteXLoaderPromiseify>.
+llse-promisify begin, see <https://github.com/callstackexceed/llse-promisify>.
 
 Copyright 2021 callstackexceed
 
@@ -33,7 +33,7 @@ SOFTWARE.
         });
     }
 
-    function promiseify(func, failReturnValue) {
+    function promisify(func, failReturnValue) {
         return function(...args) {
             let returnValue;
             let promise = new Promise((reslove, reject) => {
@@ -48,11 +48,11 @@ SOFTWARE.
         }
     }
 
-    let promiseifySendModalForm =
-        promiseify(LXL_Player.prototype.sendModalForm, undefined);
+    let promisifySendModalForm =
+        promisify(LXL_Player.prototype.sendModalForm, undefined);
     addMethod(LXL_Player.prototype, 'sendModalFormPromise',
         async function sendModalFormPromise(...args) {
-            let {returnValue, promise} = promiseifySendModalForm.call(this, ...args);
+            let {returnValue, promise} = promisifySendModalForm.call(this, ...args);
             let callbackArgs = await promise;
             return {
                 formId: returnValue,
@@ -62,11 +62,11 @@ SOFTWARE.
         }
     );
 
-    let promiseifySendSimpleForm =
-        promiseify(LXL_Player.prototype.sendSimpleForm, undefined);
+    let promisifySendSimpleForm =
+        promisify(LXL_Player.prototype.sendSimpleForm, undefined);
     addMethod(LXL_Player.prototype, 'sendSimpleFormPromise',
         async function sendSimpleFormPromise(...args) {
-            let {returnValue, promise} = promiseifySendSimpleForm.call(this, ...args);
+            let {returnValue, promise} = promisifySendSimpleForm.call(this, ...args);
             let callbackArgs = await promise;
             return {
                 formId: returnValue,
@@ -76,11 +76,11 @@ SOFTWARE.
         }
     );
 
-    let promiseifySendCustomForm =
-        promiseify(LXL_Player.prototype.sendCustomForm, undefined);
+    let promisifySendCustomForm =
+        promisify(LXL_Player.prototype.sendCustomForm, undefined);
     addMethod(LXL_Player.prototype, 'sendCustomFormPromise',
         async function sendCustomFormPromise(...args) {
-            let {returnValue, promise} = promiseifySendCustomForm.call(this, ...args);
+            let {returnValue, promise} = promisifySendCustomForm.call(this, ...args);
             let callbackArgs = await promise;
             return {
                 formId: returnValue,
@@ -90,11 +90,11 @@ SOFTWARE.
         }
     );
 
-    let promiseifySendForm =
-        promiseify(LXL_Player.prototype.sendForm, undefined);
+    let promisifySendForm =
+        promisify(LXL_Player.prototype.sendForm, undefined);
     addMethod(LXL_Player.prototype, 'sendFormPromise',
             async function sendFormPromise(...args) {
-            let {returnValue, promise} = promiseifySendForm.call(this, ...args);
+            let {returnValue, promise} = promisifySendForm.call(this, ...args);
             let callbackArgs = await promise;
             if(typeof callbackArgs[1] === "number") {
                 return {
@@ -112,9 +112,9 @@ SOFTWARE.
         }
     );
 
-    let promiseifyHttpGet = promiseify(network.httpGet, false);
+    let promisifyHttpGet = promisify(network.httpGet, false);
     addMethod(network, 'httpGetPromise', async function httpGetPromise(...args) {
-        let {returnValue, promise} = promiseifyHttpGet.call(this, ...args);
+        let {returnValue, promise} = promisifyHttpGet.call(this, ...args);
         let callbackArgs = await promise;
         return {
             status: callbackArgs[0],
@@ -122,9 +122,9 @@ SOFTWARE.
         };
     });
 
-    let promiseifyHttpPost = promiseify(network.httpPost, false);
+    let promisifyHttpPost = promisify(network.httpPost, false);
     addMethod(network, 'httpPostPromise', async function httpPostPromise(...args) {
-        let {returnValue, promise} = promiseifyHttpPost.call(this, ...args);
+        let {returnValue, promise} = promisifyHttpPost.call(this, ...args);
         let callbackArgs = await promise;
         return {
             status: callbackArgs[0],
@@ -132,7 +132,7 @@ SOFTWARE.
         };
     });
 
-    function systemPromiseify(func, failReturnValue) {
+    function systemPromisify(func, failReturnValue) {
         return function(arg1, ...rest) {
             let returnValue;
             let promise = new Promise((reslove, reject) => {
@@ -148,9 +148,9 @@ SOFTWARE.
     }
 
 
-    let promiseifyCmd = systemPromiseify(system.cmd, false);
+    let promisifyCmd = systemPromisify(system.cmd, false);
     addMethod(system, 'cmdPromise', async function cmdPromise(...args) {
-        let {returnValue, promise} = promiseifyCmd.call(this, ...args);
+        let {returnValue, promise} = promisifyCmd.call(this, ...args);
         let callbackArgs = await promise;
         return {
             exitcode: callbackArgs[0],
@@ -158,9 +158,9 @@ SOFTWARE.
         };
     });
 
-    let promiseifyNewProcess = systemPromiseify(system.newProcess, false);
+    let promisifyNewProcess = systemPromisify(system.newProcess, false);
     addMethod(system, 'newProcessPromise', async function newProcessPromise(...args) {
-        let {returnValue, promise} = promiseifyNewProcess.call(this, ...args);
+        let {returnValue, promise} = promisifyNewProcess.call(this, ...args);
         let callbackArgs = await promise;
         return {
             exitcode: callbackArgs[0],
@@ -169,5 +169,5 @@ SOFTWARE.
     });
 })();
 /*
-LiteXLoaderPromiseify end.
+llse-promisify end.
 */
