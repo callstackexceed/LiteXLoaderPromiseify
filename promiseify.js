@@ -24,6 +24,15 @@ SOFTWARE.
 
 (function () {    
     "use strict";
+    function addMethod(obj, methodName, method) {
+        Object.defineProperty(obj, methodName, {
+            value: method,
+            writable: true,
+            enumerable: false,
+            configurable: true
+        });
+    }
+
     function promiseify(func, failReturnValue) {
         return function(...args) {
             let returnValue;
@@ -39,83 +48,89 @@ SOFTWARE.
         }
     }
 
-    LXL_Player.prototype.sendModalFormPromise = async function(...args) {
-        let {returnValue, promise} = 
-            promiseify(LXL_Player.prototype.sendModalForm, undefined)
-            .call(this, ...args);
-        let callbackArgs = await promise;
-        return {
-            formId: returnValue,
-            player: callbackArgs[0],
-            id: callbackArgs[1]
-        }
-    }
-
-    LXL_Player.prototype.sendSimpleFormPromise = async function(...args) {
-        let {returnValue, promise} = 
-            promiseify(LXL_Player.prototype.sendSimpleForm, undefined)
-            .call(this, ...args);
-        let callbackArgs = await promise;
-        return {
-            formId: returnValue,
-            player: callbackArgs[0],
-            id: callbackArgs[1]
-        }
-    }
-
-    LXL_Player.prototype.sendCustomFormPromise = async function(...args) {
-        let {returnValue, promise} = 
-            promiseify(LXL_Player.prototype.sendCustomForm, undefined)
-            .call(this, ...args);
-        let callbackArgs = await promise;
-        return {
-            formId: returnValue,
-            player: callbackArgs[0],
-            data: callbackArgs[1]
-        }
-    }
-
-    LXL_Player.prototype.sendFormPromise = async function(...args) {
-        let {returnValue, promise} =
-            promiseify(LXL_Player.prototype.sendForm, undefined)
-            .call(this, ...args);
-        let callbackArgs = await promise;
-        if(typeof callbackArgs[1] === "number") {
+    let promiseifySendModalForm =
+        promiseify(LXL_Player.prototype.sendModalForm, undefined);
+    addMethod(LXL_Player.prototype, 'sendModalFormPromise',
+        async function sendModalFormPromise(...args) {
+            let {returnValue, promise} = promiseifySendModalForm.call(this, ...args);
+            let callbackArgs = await promise;
             return {
                 formId: returnValue,
                 player: callbackArgs[0],
                 id: callbackArgs[1]
-            }
-        } else {
+            };
+        }
+    );
+
+    let promiseifySendSimpleForm =
+        promiseify(LXL_Player.prototype.sendSimpleForm, undefined);
+    addMethod(LXL_Player.prototype, 'sendSimpleFormPromise',
+        async function sendSimpleFormPromise(...args) {
+            let {returnValue, promise} = promiseifySendSimpleForm.call(this, ...args);
+            let callbackArgs = await promise;
+            return {
+                formId: returnValue,
+                player: callbackArgs[0],
+                id: callbackArgs[1]
+            };
+        }
+    );
+
+    let promiseifySendCustomForm =
+        promiseify(LXL_Player.prototype.sendCustomForm, undefined);
+    addMethod(LXL_Player.prototype, 'sendCustomFormPromise',
+        async function sendCustomFormPromise(...args) {
+            let {returnValue, promise} = promiseifySendCustomForm.call(this, ...args);
+            let callbackArgs = await promise;
             return {
                 formId: returnValue,
                 player: callbackArgs[0],
                 data: callbackArgs[1]
+            };
+        }
+    );
+
+    let promiseifySendForm =
+        promiseify(LXL_Player.prototype.sendForm, undefined);
+    addMethod(LXL_Player.prototype, 'sendFormPromise',
+            async function sendFormPromise(...args) {
+            let {returnValue, promise} = promiseifySendForm.call(this, ...args);
+            let callbackArgs = await promise;
+            if(typeof callbackArgs[1] === "number") {
+                return {
+                    formId: returnValue,
+                    player: callbackArgs[0],
+                    id: callbackArgs[1]
+                };
+            } else {
+                return {
+                    formId: returnValue,
+                    player: callbackArgs[0],
+                    data: callbackArgs[1]
+                };
             }
         }
-    }
+    );
 
-    network.httpGetPromise = async function(...args) {
-        let {returnValue, promise} = 
-            promiseify(network.httpGet, false)
-            .call(this, ...args);
+    let promiseifyHttpGet = promiseify(network.httpGet, false);
+    addMethod(network, 'httpGetPromise', async function httpGetPromise(...args) {
+        let {returnValue, promise} = promiseifyHttpGet.call(this, ...args);
         let callbackArgs = await promise;
         return {
             status: callbackArgs[0],
             result: callbackArgs[1]
-        }
-    }
+        };
+    });
 
-    network.httpPostPromise = async function(...args) {
-        let {returnValue, promise} = 
-            promiseify(network.httpPost, false)
-            .call(this, ...args);
+    let promiseifyHttpPost = promiseify(network.httpPost, false);
+    addMethod(network, 'httpPostPromise', async function httpPostPromise(...args) {
+        let {returnValue, promise} = promiseifyHttpPost.call(this, ...args);
         let callbackArgs = await promise;
         return {
             status: callbackArgs[0],
             result : callbackArgs[1]
-        }
-    }
+        };
+    });
 
     function systemPromiseify(func, failReturnValue) {
         return function(arg1, ...rest) {
@@ -133,27 +148,25 @@ SOFTWARE.
     }
 
 
-    system.cmdPromise = async function(...args) {
-        let {returnValue, promise} = 
-            systemPromiseify(system.cmd, false)
-            .call(this, ...args);
+    let promiseifyCmd = systemPromiseify(system.cmd, false);
+    addMethod(system, 'cmdPromise', async function cmdPromise(...args) {
+        let {returnValue, promise} = promiseifyCmd.call(this, ...args);
         let callbackArgs = await promise;
         return {
             exitcode: callbackArgs[0],
             output: callbackArgs[1]
-        }
-    }
+        };
+    });
 
-    system.newProcessPromise = async function(...args) {
-        let {returnValue, promise} = 
-            systemPromiseify(system.newProcess, false)
-            .call(this, ...args);
+    let promiseifyNewProcess = systemPromiseify(system.newProcess, false);
+    addMethod(system, 'newProcessPromise', async function newProcessPromise(...args) {
+        let {returnValue, promise} = promiseifyNewProcess.call(this, ...args);
         let callbackArgs = await promise;
         return {
             exitcode: callbackArgs[0],
             output: callbackArgs[1]
-        }
-    }
+        };
+    });
 })();
 /*
 LiteXLoaderPromiseify end.
