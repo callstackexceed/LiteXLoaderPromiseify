@@ -4,6 +4,65 @@ llse-promisify promisify the [LiteLoader](https://www.litebds.com/) API.
 
 [中文文档在这。](./README-zh.md)
 
+## Tutorial
+
+### What is promisify?
+
+`Promise` objects are built-in objects in the JavaScript language that packs asynchronous processing.
+
+"promisify" means to convert APIs that don't use `Promise` to `Promise` style.
+
+### Why do you need promisify?
+
+`Promise` can avoid callback hell and can simplify asynchronous processing by using `async`/`await` syntax.
+
+Suppose there is a requirement where we need to send a custom form, and send another custom form after the player answers. And process the returned data.
+However, if the player cancels any of these forms, we stop asking the player.
+
+The sample code to implement this requirement will looks like this.
+
+````JS
+function askPlayer(player){
+    // some codes build customForm1 and customForm2...
+    player.sendForm(customForm1, function (player, formId1, data1) {
+        if(data1 === undefined) {
+            log(`${player.name} refuse the form1`);
+            return;
+        }
+        player.sendForm(customForm2, function (player, formId2, data2) {
+            if(data2 === undefined) {
+                log(`${player.name} refuse the form2`);
+                return;
+            }
+            // do something else
+        });
+    });
+}
+````
+
+Notice that the indentation of the entire function increases gradually, which is called callback hell.
+While the callbacks for the sample code are acceptable, if the requirement is more complex, such as adding error handling or adding logic, the depth will eventually become unacceptable.
+
+We rewrite this function using the `Promise` style, noting the use of the [ECMAScript 2016](https://262.ecma-international.org/7.0/index.html) syntax `async`/`await` .
+
+````JS
+async function askPlayer(player){
+    // some codes build customForm1 and customForm2...
+    let resultObj1 = await player.sendFormPromise(customForm1);
+    if(resultObj1.data === undefined) {
+        log(`${player.name} refuse the form`);
+        return;
+    }
+    let resultObj2 = await player.sendFormPromise(customForm2);
+    if(resultObj2.data === undefined) {
+        log(`${player.name} refuse the form2`);
+        return;
+    }
+    // do something else
+}
+````
+The `Promise` style avoids callback hell and makes code more sequential. `async`/`await` makes the code more concise.
+
 ## API Reference
 
 > The following document is adapted and translated from the official document of LiteXLoader

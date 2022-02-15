@@ -4,6 +4,65 @@ llse-promisify promisify [LiteLoader](https://www.litebds.com/)的API。
 
 [English documentation is here.](./README.md)
 
+## 教程
+
+### 什么是 promisify ？
+
+`Promise` 对象是 JavaScript 语言中封装异步处理的内置对象。
+
+"promisify" 指把不使用 `Promise` 的 API 转换为 `Promise` 风格。
+
+### 为什么需要 promisify ？
+
+`Promise` 能够避免回调地狱，并且能够使用 `async`/`await` 语法简化异步处理。
+
+设想有一个需求，我们需要发送一个自定义表单，并在玩家回答后发送另一个自定义表单。并且处理返回的数据。
+但是，如果玩家取消了其中任意一个表单，我们就停止询问玩家。
+
+实现这一需求的示例代码大约为这样。
+
+```JS
+function askPlayer(player){
+    // some codes build customForm1 and customForm2...
+    player.sendForm(customForm1, function (player, formId1, data1) {
+        if(data1 === undefined) {
+            log(`${player.name} refuse the form1`);
+            return;
+        }
+        player.sendForm(customForm2, function (player, formId2, data2) {
+            if(data2 === undefined) {
+                log(`${player.name} refuse the form2`);
+                return;
+            }
+            // do something else
+        });
+    });
+}
+```
+
+注意到，整个函数的缩进逐渐增加，这被称为回调地狱。
+虽然示例代码的回调还可以接受，但是如果需求更加复杂，比如增加错误处理或增加逻辑，嵌套深度最终将不可接受。
+
+我们使用 `Promise` 风格改写这个函数，注意这里使用了 [ECMAScript 2016](https://262.ecma-international.org/7.0/index.html) 的语法 `async`/`await` 。
+
+```JS
+async function askPlayer(player){
+    // some codes build customForm1 and customForm2...
+    let resultObj1 = await player.sendFormPromise(customForm1);
+    if(resultObj1.data === undefined) {
+        log(`${player.name} refuse the form`);
+        return;
+    }
+    let resultObj2 = await player.sendFormPromise(customForm2);
+    if(resultObj2.data === undefined) {
+        log(`${player.name} refuse the form2`);
+        return;
+    }
+    // do something else
+}
+```
+`Promise` 风格避免了回调地狱，并且使代码更加顺序。 `async`/`await` 使得代码更加简洁。
+
 ## API 参考
 
 > 以下文档摘抄改写自LiteXLoader的官方文档
