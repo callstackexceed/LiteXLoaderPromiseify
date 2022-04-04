@@ -49,8 +49,8 @@ SOFTWARE.
     }
 
     let promisifySendModalForm =
-        promisify(LXL_Player.prototype.sendModalForm, undefined);
-    addMethod(LXL_Player.prototype, 'sendModalFormPromise',
+        promisify(LLSE_Player.prototype.sendModalForm, undefined);
+    addMethod(LLSE_Player.prototype, 'sendModalFormPromise',
         async function sendModalFormPromise(...args) {
             let {returnValue, promise} = promisifySendModalForm.call(this, ...args);
             let callbackArgs = await promise;
@@ -63,8 +63,8 @@ SOFTWARE.
     );
 
     let promisifySendSimpleForm =
-        promisify(LXL_Player.prototype.sendSimpleForm, undefined);
-    addMethod(LXL_Player.prototype, 'sendSimpleFormPromise',
+        promisify(LLSE_Player.prototype.sendSimpleForm, undefined);
+    addMethod(LLSE_Player.prototype, 'sendSimpleFormPromise',
         async function sendSimpleFormPromise(...args) {
             let {returnValue, promise} = promisifySendSimpleForm.call(this, ...args);
             let callbackArgs = await promise;
@@ -77,8 +77,8 @@ SOFTWARE.
     );
 
     let promisifySendCustomForm =
-        promisify(LXL_Player.prototype.sendCustomForm, undefined);
-    addMethod(LXL_Player.prototype, 'sendCustomFormPromise',
+        promisify(LLSE_Player.prototype.sendCustomForm, undefined);
+    addMethod(LLSE_Player.prototype, 'sendCustomFormPromise',
         async function sendCustomFormPromise(...args) {
             let {returnValue, promise} = promisifySendCustomForm.call(this, ...args);
             let callbackArgs = await promise;
@@ -91,8 +91,8 @@ SOFTWARE.
     );
 
     let promisifySendForm =
-        promisify(LXL_Player.prototype.sendForm, undefined);
-    addMethod(LXL_Player.prototype, 'sendFormPromise',
+        promisify(LLSE_Player.prototype.sendForm, undefined);
+    addMethod(LLSE_Player.prototype, 'sendFormPromise',
             async function sendFormPromise(...args) {
             let {returnValue, promise} = promisifySendForm.call(this, ...args);
             let callbackArgs = await promise;
